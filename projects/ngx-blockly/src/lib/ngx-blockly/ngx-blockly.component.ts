@@ -53,6 +53,17 @@ export class NgxBlocklyComponent implements OnInit, AfterViewInit {
                 Blockly.Python[block.name] = function (blocklyBlock) {
                     return block.toPythonCode();
                 };
+
+                if (block.blockMutator) {
+                    Blockly.Extensions.registerMutator(block.blockMutator.name, {
+                        mutationToDom: function () {
+                            return block.blockMutator.mutationToDom();
+                        },
+                        domToMutation: function (xmlElement: any) {
+                            block.blockMutator.domToMutation(xmlElement);
+                        }
+                    });
+                }
             }
         }
     }

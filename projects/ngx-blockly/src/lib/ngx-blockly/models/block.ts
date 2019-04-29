@@ -1,12 +1,16 @@
+import { BlockMutator } from './block-mutator';
+
 export abstract class Block {
 
     private _block: any;
     private _name: string;
     private _categories: string[];
+    private _blockMutator: BlockMutator;
 
-    constructor(name: string, categories: string[]) {
+    constructor(name: string, categories: string[], blockMutator: BlockMutator) {
         this._name = name;
         this._categories = categories;
+        this._blockMutator = blockMutator;
     }
 
     public init(block: any) {
@@ -59,5 +63,13 @@ export abstract class Block {
 
     set categories(value: string[]) {
         this._categories = value;
+    }
+
+    get blockMutator(): BlockMutator {
+        return this._blockMutator;
+    }
+
+    set blockMutator(value: BlockMutator) {
+        this._blockMutator = value;
     }
 }
